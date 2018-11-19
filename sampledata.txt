@@ -1,0 +1,20 @@
+delete [select Id from Order];
+delete [select Id from Invoice__c];
+delete [select Id from Account];
+Account orderAccount = new Account();
+orderAccount.Name = 'Great customer!';
+insert orderAccount;
+List<Order> orders = new List<Order>();
+for(Integer orderBatchIdx = 0; orderBatchIdx < 5; orderBatchIdx++) {
+    for(Integer orderIdx = 0; orderIdx < 200; orderIdx++) {
+        Order order = new Order();
+        order.Name = ''+((orderBatchIdx+1) * 100);
+        order.Status = 'Draft';
+        order.EffectiveDate = System.today();
+        order.AccountId = orderAccount.Id;
+        orders.add(order);
+    }
+}
+insert orders;
+
+sfdx force:user:permset:assign --permsetname Billing
