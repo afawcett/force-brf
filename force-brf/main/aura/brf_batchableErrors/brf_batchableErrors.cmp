@@ -3,11 +3,16 @@
     <aura:attribute name="columns" type="List"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <lightning:card title="Batch Job Errors">
-        <lightning:datatable 
+        <aura:set attribute="actions">
+            <lightning:button label="Refresh" onclick="{!c.doInit}"/>
+        </aura:set>         
+        <p class="slds-p-horizontal_small">
+            <lightning:datatable 
             hideCheckboxColumn="true" 
             data="{! v.failedJobs }" 
             columns="{! v.columns }" 
             keyField="Id"
-            onrowaction="{! c.handleRowAction }"/>    
+            onrowaction="{! c.handleRowAction }"/>        
+        </p>
     </lightning:card>
 </aura:component>	

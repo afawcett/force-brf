@@ -3,6 +3,11 @@
         var action = event.getParam('action');
         var row = event.getParam('row');
         switch (action.name) {
+            case 'view_details':
+                var navEvt = $A.get("e.force:navigateToSObject");
+                navEvt.setParams({"recordId": row.Id});
+                navEvt.fire();
+                break;
             case 'retry':
                 var action = cmp.get("c.retryJob");
                 action.setParams({ retryJobId : row.JobId__c });
@@ -40,6 +45,7 @@
             { label: 'Job Apex Class', fieldName: 'JobApexClass__c', type: 'text'},
             { label: 'Job Creation Date', fieldName: 'JobCreatedDate__c', type: 'date'},
             { label: 'Job Errors', fieldName: 'JobErrors__c', type: 'number'},
+            { label: 'View', type: 'button', initialWidth: 135, typeAttributes: { label: 'View Details', name: 'view_details', title: 'Click to View Details'}},
             { type: 'action', typeAttributes: { rowActions: actions } }
         ]);        
 
