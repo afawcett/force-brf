@@ -4,5 +4,6 @@
 
 package.xml
 /profiles
+/settings
 **appMenu
 **appSwitcher

@@ -17,4 +17,7 @@ for(Integer orderBatchIdx = 0; orderBatchIdx < 5; orderBatchIdx++) {
 }
 insert orders;
 
+InvoiceGenerationJob.run();
+
 sfdx force:user:permset:assign --permsetname Billing
+sfdx force:user:permset:assign --permsetname brf_BatchRetryFramework

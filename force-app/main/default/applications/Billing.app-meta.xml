@@ -9,6 +9,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Billing</label>
     <navType>Standard</navType>
+    <tabs>standard-home</tabs>
     <tabs>standard-Order</tabs>
     <tabs>Invoice__c</tabs>
     <tabs>brf_BatchApexErrorLog__c</tabs>
