@@ -1,11 +1,11 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app"
+      "path": "force-app",
+      "default": true      
     },
     {
-      "path": "force-brf",
-      "default": true
+      "path": "force-brf"
     }
 
   ],

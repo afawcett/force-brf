@@ -17,7 +17,7 @@ public class InvoiceGenerationJob
             invoice.DueDate__c = System.today().addDays(30);
             invoice.Paid__c = false;
             invoice.Order__c = order.Id;
-            invoice.Amount__c = Decimal.valueOf(order.Name);
+            invoice.Amount__c = Decimal.valueOf(order.Name.split(':')[1]);
             invoices.add(invoice);
             produceSomeExceptions(invoice);
         }

@@ -2,6 +2,7 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>ORDER.NAME</columns>
     <columns>CONTRACT.CONTRACT_NUMBER</columns>
     <columns>SALES.ACCOUNT.NAME</columns>
     <columns>ORDERS.EFFECTIVE_DATE</columns>

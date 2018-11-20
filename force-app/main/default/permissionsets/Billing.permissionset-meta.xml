@@ -125,6 +125,11 @@
         <field>Order.Type</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Order.InvoiceGenerationErrorType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Billing</label>
     <objectPermissions>

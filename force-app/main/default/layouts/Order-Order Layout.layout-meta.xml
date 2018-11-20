@@ -42,6 +42,10 @@
                 <behavior>Edit</behavior>
                 <field>InvoiceGenerationError__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>InvoiceGenerationErrorType__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
