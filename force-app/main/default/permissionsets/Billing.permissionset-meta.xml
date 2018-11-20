@@ -81,8 +81,18 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Order.InvoiceGenerationErrorType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Order.InvoiceGenerationError__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Order.Invoiced__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -125,11 +135,6 @@
         <field>Order.Type</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Order.InvoiceGenerationErrorType__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Billing</label>
     <objectPermissions>
@@ -150,6 +155,10 @@
         <object>Order</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <pageAccesses>
+        <apexPage>runinvoicegeneration</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <tabSettings>
         <tab>Invoice__c</tab>
         <visibility>Visible</visibility>

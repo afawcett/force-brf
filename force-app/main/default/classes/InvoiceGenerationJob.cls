@@ -5,23 +5,30 @@ public class InvoiceGenerationJob
     implements Database.Batchable<SObject>, brf_BatchableErrorHandler
 {
     public List<Order> start(Database.BatchableContext ctx) {
-        return [select Id from Order where EffectiveDate = THIS_WEEK order by Name];
+        return [select Id from Order 
+                where EffectiveDate = THIS_WEEK and Invoiced__c != true
+                order by Name];
     }
 
     public void execute(Database.BatchableContext ctx, List<SObject> scope) {
         // Invoice generation from given orders
         Set<Id> orderIds = new Map<Id, SObject>(scope).keySet();
         List<Invoice__c> invoices = new List<Invoice__c>();
-        for(Order order : [select Id, Name from Order where Id in :orderIds]) {
+        List<Order> orders = 
+            [select Id, TotalAmount, Name from Order 
+                where Id in :orderIds and Invoiced__c != true];
+        for(Order order : orders) {
+            produceSomeExceptions(order.Name);
             Invoice__c invoice = new Invoice__c();
             invoice.DueDate__c = System.today().addDays(30);
             invoice.Paid__c = false;
             invoice.Order__c = order.Id;
-            invoice.Amount__c = Decimal.valueOf(order.Name.split(':')[1]);
+            invoice.Amount__c = order.TotalAmount;
             invoices.add(invoice);
-            produceSomeExceptions(invoice);
+            order.Invoiced__c = true;
         }
         insert invoices;
+        update orders;
     }
     
     public void finish(Database.BatchableContext ctx) { }
@@ -37,20 +44,19 @@ public class InvoiceGenerationJob
     }
 
     // Produce some exceptions, some catchable, some not...
-    private void produceSomeExceptions(Invoice__c invoice) {
-        Integer invoiceAmount = Integer.valueOf(invoice.Amount__c);
-        switch on invoiceAmount {
-           when 100 {
+    private void produceSomeExceptions(String orderName) {
+        switch on orderName {
+           when 'Ref:100' {
                // Standard exception
-               throw new InvoiceGenerationException('Invalid Invoice amount.');        
+               throw new InvoiceGenerationException('Order Ref:100 is invalid.');
            }
-           when 300 {
+           when 'Ref:300' {
                // Divide by zero!
                Integer newAmount = 20 / 0;
            }
-           when 500 {
+           when 'Ref:500' {
                 // Limits exception
-                for(Integer idx=0; idx<invoiceAmount; idx++) {
+                for(Integer idx=0; idx<201; idx++) {
                     Order order = [select Id from Order limit 1];
                 }
            }

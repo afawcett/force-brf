@@ -46,6 +46,10 @@
                 <behavior>Readonly</behavior>
                 <field>InvoiceGenerationErrorType__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Invoiced__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
