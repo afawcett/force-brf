@@ -36,7 +36,7 @@ public class brf_BatchableErrorTestJob
             if(retryMode) {
                 throw e;
             }
-            // We emulate BatchApexErrorEvent firing if running in test mode (subject to change in once the feature GA's)
+            // We emulate BatchApexErrorEvent firing if running in test mode (subject to change once the feature GA's)
             BatchApexErrorEvent event = new BatchApexErrorEvent();
             event.AsyncApexJobId = ctx.getJobId();
             event.DoesExceedJobScopeMaxLength = false;
