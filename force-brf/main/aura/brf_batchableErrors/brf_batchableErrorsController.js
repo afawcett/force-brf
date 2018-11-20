@@ -16,7 +16,7 @@
                     if (state === "SUCCESS") {
                         cmp.set('v.failedJobs', response.getReturnValue());
                         var resultsToast = $A.get("e.force:showToast");
-                        resultsToast.setParams({ "message": "Job retry for " + row.JobApexClass__c + " has been submitted."});
+                        resultsToast.setParams({ "type":"success", "message": "Job retry for " + row.JobApexClass__c + " has been submitted."});
                         resultsToast.fire();
                     }
                     else if (state === "INCOMPLETE") {
