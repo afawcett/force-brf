@@ -12,11 +12,10 @@ public class InvoiceGenerationJob
 
     public void execute(Database.BatchableContext ctx, List<SObject> scope) {
         // Invoice generation from given orders
-        Set<Id> orderIds = new Map<Id, SObject>(scope).keySet();
         List<Invoice__c> invoices = new List<Invoice__c>();
         List<Order> orders = 
             [select Id, TotalAmount, Name from Order 
-                where Id in :orderIds and Invoiced__c != true];
+                where Id in :scope and Invoiced__c != true];
         for(Order order : orders) {
             produceSomeExceptions(order.Name);
             Invoice__c invoice = new Invoice__c();
