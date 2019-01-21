@@ -1,6 +1,12 @@
 # force-brf - Batch Retry Framework
 
-Work in progress reference lib for [BatchApexErrorEvent](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_batchapexerrorevent.htm) handling. Blog to follow!
+Reference lib for [BatchApexErrorEvent](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_batchapexerrorevent.htm) handling. See [blog here](https://developer.salesforce.com/blogs/2019/01/building-a-batch-retry-framework-with-batchapexerrorevent.html) for more details.
+
+In Winter’19 the BatchApexErrorEvent standard platform event was introduced. This event extends the above error reporting facilities with the ability to use Platform Events to listen (subscribe) to all job failures in variety of ways using clicks or code (clicks are not supported in Beta). The fields on the event give rich access to the exception type, stack trace, affected scope (records) and job ID. You can review a full list of the available fields here.
+
+BatchApexErrorEvent. An event record provides more granular error tracking than the Apex Jobs UI. It includes the record IDs being processed, exception type, exception message, and stack trace. You can also incorporate custom handling and retry logic for failures. You can invoke custom Apex logic from any trigger on this type of event, so Apex developers can build functionality like custom logging or automated retry handling.
+
+![image](https://res.cloudinary.com/hzxejch6p/image/upload/c_scale,w_800/v1546556939/image_8_wdhab6.png)
 
 Deploy Setup
 ------------
