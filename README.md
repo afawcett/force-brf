@@ -56,8 +56,6 @@ Perform the following steps to try out the framework with the sample app (includ
 2. Click the **Orders** tab and select the **All** list view
 3. Click the **Invoice Generation** button to start the job
 4. Open the **Failed Jobs** utlity bar and click **Refresh** button to see logged failures
-5. Use the **Orders** tab and **Bad Orders** list view to review bad records and delete one or more
+5. Use the **Orders** tab and **Bad Orders** list view to review bad records and delete one or edit **Order Start Date** to another date
 6. Open the **Failed Jobs** utility bar and click **Retry** action on the failed job
 7. Click the **Refresh** button to review remaining errors, repeat steps 5-7 until all clear!
-
-**NOTE:** Hint change the **Order State Date** on the bad orders to fix the errors! ;-)
