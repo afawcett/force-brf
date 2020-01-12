@@ -20,6 +20,11 @@ sfdx force:user:permset:assign --permsetname brf_BatchRetryFramework
 
 Data Setup
 ----------
+
+```
+sfdc force:apex:execute
+```
+
 Run the following Apex code block to configure test data.
 
 ```
