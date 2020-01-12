@@ -14,10 +14,10 @@ public class InvoiceGenerationJob
         // Invoice generation from given orders
         List<Invoice__c> invoices = new List<Invoice__c>();
         List<Order> orders = 
-            [select Id, TotalAmount, Name from Order 
+            [select Id, TotalAmount, Invoiced__c, EffectiveDate, Name from Order 
                 where Id in :scope and Invoiced__c != true];
         for(Order order : orders) {
-            produceSomeExceptions(order.Name);
+            produceSomeExceptions(order.Name, order.EffectiveDate);
             Invoice__c invoice = new Invoice__c();
             invoice.DueDate__c = System.today().addDays(30);
             invoice.Paid__c = false;
@@ -43,7 +43,8 @@ public class InvoiceGenerationJob
     }
 
     // Produce some exceptions, some catchable, some not...
-    private void produceSomeExceptions(String orderName) {
+    private void produceSomeExceptions(String orderName, Date orderDate) {
+        if(orderDate != System.today()) { return; } 
         switch on orderName {
            when 'Ref:100' {
                // Standard exception
