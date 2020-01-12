@@ -3,7 +3,7 @@
 #
 
 package.xml
-/profiles
+**profiles
 /settings
 **appMenu
 **appSwitcher

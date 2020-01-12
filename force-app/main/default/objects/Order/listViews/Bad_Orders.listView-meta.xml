@@ -4,12 +4,12 @@
     <booleanFilter>1 OR 2 OR 3</booleanFilter>
     <columns>ORDERS.ORDER_NUMBER</columns>
     <columns>ORDER.NAME</columns>
-    <columns>CONTRACT.CONTRACT_NUMBER</columns>
     <columns>SALES.ACCOUNT.NAME</columns>
     <columns>ORDERS.EFFECTIVE_DATE</columns>
     <columns>ORDERS.TOTAL_AMOUNT</columns>
     <columns>ORDERS.STATUS</columns>
     <columns>InvoiceGenerationErrorType__c</columns>
+    <columns>Invoiced__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>ORDER.NAME</field>

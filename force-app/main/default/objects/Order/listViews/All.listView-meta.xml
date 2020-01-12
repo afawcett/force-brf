@@ -8,6 +8,7 @@
     <columns>ORDERS.EFFECTIVE_DATE</columns>
     <columns>ORDERS.TOTAL_AMOUNT</columns>
     <columns>ORDERS.STATUS</columns>
+    <columns>Invoiced__c</columns>
     <filterScope>Mine</filterScope>
     <label>All</label>
 </ListView>

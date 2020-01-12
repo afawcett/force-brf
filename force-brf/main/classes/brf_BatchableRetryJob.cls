@@ -19,39 +19,22 @@ public class brf_BatchableRetryJob
     }
 
     public void execute(Database.BatchableContext ctx, List<brf_BatchableError> scope) {
-        try {
-            // One batch scope here represents an entire previously failed batch scope
-            brf_BatchableError error = scope[0];
+        // One batch scope here represents an entire previously failed batch scope
+        brf_BatchableError error = scope[0];
 
-            // Construct an SObject scope to pass to the execute method
-            // TODO: Support non-SObject scopes
-            List<Id> scopeErrorIds = error.JobScope.split(',');
-            SObjectType sObjectType = scopeErrorIds[0].getSobjectType();
-            List<SObject> retryScope = new List<SObject>();
-            for(Id errorId : scopeErrorIds) {
-                retryScope.add(sObjectType.newSObject(errorId));
-            }
-
-            // Invoke the execute method on the original batch apex job class
-            Type apexJobClassType = Type.forName(error.ApexClassName);
-            Database.Batchable<SObject> batchJob = (Database.Batchable<SObject>) apexJobClassType.newInstance();
-            batchJob.execute(ctx, retryScope);  
-        } catch (Exception e) {
-            // For now (this is still a beta feature) we emulate BatchApexErrorEvent firing this event if running in test mode
-            if(Test.isRunningTest()) {
-                BatchApexErrorEvent event = new BatchApexErrorEvent();
-                event.AsyncApexJobId = ctx.getJobId();
-                event.DoesExceedJobScopeMaxLength = false;
-                event.ExceptionType = String.valueOf(e).split(':')[0];
-                event.JobScope = scope[0].toString();
-                event.Message = e.getMessage();
-                event.RequestId = null; // Not currently acccessibe via Apex
-                event.StackTrace = e.getStackTraceString();
-                EventBus.publish(event);
-            } else {
-                throw e;
-            }
+        // Construct an SObject scope to pass to the execute method
+        // TODO: Support non-SObject scopes
+        List<Id> scopeErrorIds = error.JobScope.split(',');
+        SObjectType sObjectType = scopeErrorIds[0].getSobjectType();
+        List<SObject> retryScope = new List<SObject>();
+        for(Id errorId : scopeErrorIds) {
+            retryScope.add(sObjectType.newSObject(errorId));
         }
+
+        // Invoke the execute method on the original batch apex job class
+        Type apexJobClassType = Type.forName(error.ApexClassName);
+        Database.Batchable<SObject> batchJob = (Database.Batchable<SObject>) apexJobClassType.newInstance();
+        batchJob.execute(ctx, retryScope);  
     }
     
     public void finish(Database.BatchableContext ctx) { }

@@ -13,7 +13,9 @@ private class brf_BatchApexErrorEventsTest {
         // When
         Test.startTest();
         Id jobId = Database.executeBatch(job);
-        Test.stopTest();
+        try { Test.stopTest(); }
+        catch(Exception ex) { /* don't fail this test if there were errors in the batch job - we want that */ }
+        Test.getEventBus().deliver();
 
         // Then (failures captured)
         System.assertEquals(1, [select id from brf_BatchApexErrorLog__c].size());
@@ -48,7 +50,9 @@ private class brf_BatchApexErrorEventsTest {
         // When
         Test.startTest();
         brf_BatchableRetryJob.run(testJobId);
-        Test.stopTest();
+        try { Test.stopTest(); }
+        catch(Exception ex) { /* don't fail this test if there were errors in the batch job - we want that */ }
+        Test.getEventBus().deliver();
 
         // Then (retry successful)
         System.assertEquals(0, [select id from brf_BatchApexErrorLog__c].size());
@@ -82,7 +86,9 @@ private class brf_BatchApexErrorEventsTest {
         // When
         Test.startTest();
         brf_BatchableRetryJob.run(testJobId);
-        Test.stopTest();
+        try { Test.stopTest(); }
+        catch(Exception ex) { /* don't fail this test if there were errors in the batch job - we want that */ }
+        Test.getEventBus().deliver();
 
         // Then (retry failed)
         System.assertEquals(1, [select id from brf_BatchApexErrorLog__c].size());
