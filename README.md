@@ -13,7 +13,7 @@ Deploy Setup
 Run the following commands to deploy:-
 
 ```
-sfdc force:source:push
+sfdx force:source:push
 sfdx force:user:permset:assign --permsetname Billing
 sfdx force:user:permset:assign --permsetname brf_BatchRetryFramework
 ```
@@ -22,7 +22,7 @@ Data Setup
 ----------
 
 ```
-sfdc force:apex:execute
+sfdx force:apex:execute
 ```
 
 Run the following Apex code block to configure test data.
